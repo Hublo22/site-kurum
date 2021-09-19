@@ -34,6 +34,7 @@ public class ComiteView extends VerticalLayout implements LocaleChangeObserver {
         String content = getTranslation("comite.content", UI.getCurrent().getLocale());
         html = new Html("<text>" + content + "</text>");
         add(html);
+        setAlignItems(Alignment.CENTER);
     }
 
     @Override
@@ -50,7 +51,6 @@ public class ComiteView extends VerticalLayout implements LocaleChangeObserver {
             if(UI.getCurrent().getLocale().equals(Locale.FRENCH)) {
                 Resource template = resourceLoader.getResource("classpath:comite_fr.template");
                 result = IOUtils.toString(template.getInputStream(),"UTF-8");
-//                result = FileUtils .readFileToString(template, "UTF-8");
             }
         } catch (IOException e) {
             throw new RuntimeException();
