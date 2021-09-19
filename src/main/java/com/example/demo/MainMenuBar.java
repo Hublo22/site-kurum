@@ -17,11 +17,14 @@ public class MainMenuBar extends MenuBar implements LocaleChangeObserver {
     public MainMenuBar() {
         super();
 
+//        MenuItem presentation = addItem(getTranslation("presentation", UI.getCurrent().getLocale()));
+//        presentation.addClickListener(e -> UI.getCurrent().navigate("presentation"));
+
 
         MenuItem comite = addItem(getTranslation("comite", UI.getCurrent().getLocale()));
         comite.setId("comite");
         comite.addClickListener(e -> UI.getCurrent().navigate("comite"));
-
+/*
         MenuItem projects = addItem(getTranslation("projects", UI.getCurrent().getLocale()));
         projects.setId("projects");
         projects.addClickListener(e -> UI.getCurrent().navigate("projects"));
@@ -45,7 +48,11 @@ public class MainMenuBar extends MenuBar implements LocaleChangeObserver {
         MenuItem helpus = addItem(getTranslation("helpus", UI.getCurrent().getLocale()));
         helpus.setId("helpus");
         helpus.addClickListener(e -> UI.getCurrent().navigate("helpus"));
+
+ */
     }
+
+
 
     @Override
     public void localeChange(LocaleChangeEvent event) {

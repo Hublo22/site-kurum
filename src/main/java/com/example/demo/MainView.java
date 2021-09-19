@@ -33,7 +33,7 @@ public class MainView extends VerticalLayout implements RouterLayout {
         mainTitle.setId("mainTitle");
         add(mainTitle);
         setAlignItems(Alignment.CENTER);
-        //add(new MainMenuBar());
+        add(new MainMenuBar());
         //add(new LanguageList().getLanguageList());
     }
 }
