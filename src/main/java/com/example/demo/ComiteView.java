@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -31,8 +32,11 @@ public class ComiteView extends VerticalLayout implements LocaleChangeObserver {
     ResourceLoader resourceLoader;
 
     public ComiteView() {
+        Image comiteImg = new Image("img/comiteKurum.jpg", "Comite");
+        comiteImg.setMaxWidth("200px");
         String content = getTranslation("comite.content", UI.getCurrent().getLocale());
         html = new Html("<text>" + content + "</text>");
+        add(comiteImg);
         add(html);
         setAlignItems(Alignment.CENTER);
     }
