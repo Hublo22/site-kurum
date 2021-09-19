@@ -1,18 +1,18 @@
-/*
-   CSS styling examples for the Vaadin app.
-   Visit https://vaadin.com/docs/flow/theme/theming-overview.html and
-   https://vaadin.com/themes/lumo for more information.
-*/
-
-/* Example: CSS class name to center align the content . */
-.centered-content {
-  margin: 0 auto;
-  max-width: 250px;
+body {
+  background: url(img/indiaFlag.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: "Comic Sans MS", Verdana, Arial, Sans-serif
 }
 
-body {
-    background-image: url(img/testPict2.jpg);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+.tempMessage {
+    font-size: 32px;
+}
+
+#mainTitle {
+    font-family: papyrus, Verdana, Arial, Sans-serif;
+    font-size: 80px;
 }
 
