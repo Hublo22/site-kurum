@@ -33,7 +33,7 @@ public class ComiteView extends VerticalLayout implements LocaleChangeObserver {
     ResourceLoader resourceLoader;
 
     public ComiteView() {
-        Image comiteImg = new Image("img/comiteKurum.jpg", "Comite");
+        Image comiteImg = new Image("img/comiteKurum_2.jpg", "Comite");
         comiteImg.setMaxWidth("750px");
         String content = "<text></text>";
         html = new Html(content);
