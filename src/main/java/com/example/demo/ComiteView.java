@@ -45,31 +45,31 @@ public class ComiteView extends VerticalLayout implements LocaleChangeObserver {
     @Override
     public void localeChange(LocaleChangeEvent event) {
         remove(html);
-        String content = loadContentFor();
+        String content = Utils.loadContentFor(resourceLoader,"comite");
         html = new Html("<text>" + content + "</text>");
         add(html);
     }
 
-    private String getTextFromResource(Resource r) throws IOException {
-        return IOUtils.toString(r.getInputStream(),"UTF-8").replace(System.getProperty("line.separator"),"<br />");
-    }
+//    private String getTextFromResource(Resource r) throws IOException {
+//        return IOUtils.toString(r.getInputStream(),"UTF-8").replace(System.getProperty("line.separator"),"<br />");
+//    }
 
-    private String loadContentFor() {
-        String result = "NO TRANSLATION TEMPLATE FILE FOUND";
-        try {
-            if(UI.getCurrent().getLocale().equals(Locale.FRENCH)) {
-                result = getTextFromResource(resourceLoader.getResource("classpath:comite_fr.template"));
-            }
-            else if(UI.getCurrent().getLocale().equals(Locale.ENGLISH)) {
-                result = getTextFromResource(resourceLoader.getResource("classpath:comite_en.template"));
-            }
-            else if(UI.getCurrent().getLocale().equals(Locale.GERMAN)) {
-                result = getTextFromResource(resourceLoader.getResource("classpath:comite_de.template"));
-            }
-
-        } catch (IOException e) {
-            throw new RuntimeException();
-        }
-        return result;
-    }
+//    private String loadContentFor() {
+//        String result = "NO TRANSLATION TEMPLATE FILE FOUND";
+//        try {
+//            if(UI.getCurrent().getLocale().equals(Locale.FRENCH)) {
+//                result = getTextFromResource(resourceLoader.getResource("classpath:comite_fr.template"));
+//            }
+//            else if(UI.getCurrent().getLocale().equals(Locale.ENGLISH)) {
+//                result = getTextFromResource(resourceLoader.getResource("classpath:comite_en.template"));
+//            }
+//            else if(UI.getCurrent().getLocale().equals(Locale.GERMAN)) {
+//                result = getTextFromResource(resourceLoader.getResource("classpath:comite_de.template"));
+//            }
+//
+//        } catch (IOException e) {
+//            throw new RuntimeException();
+//        }
+//        return result;
+//    }
 }
