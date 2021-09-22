@@ -20,6 +20,7 @@ import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.Locale;
 
@@ -33,7 +34,7 @@ public class ComiteView extends VerticalLayout implements LocaleChangeObserver {
 
     public ComiteView() {
         Image comiteImg = new Image("img/comiteKurum.jpg", "Comite");
-        comiteImg.setMaxWidth("200px");
+        comiteImg.setMaxWidth("750px");
         String content = getTranslation("comite.content", UI.getCurrent().getLocale());
         html = new Html("<text>" + content + "</text>");
         add(comiteImg);
@@ -49,13 +50,23 @@ public class ComiteView extends VerticalLayout implements LocaleChangeObserver {
         add(html);
     }
 
+    private String getTextFromResource(Resource r) throws IOException {
+        return IOUtils.toString(r.getInputStream(),"UTF-8").replace(System.getProperty("line.separator"),"<br />");
+    }
+
     private String loadContentFor() {
         String result = "NO TRANSLATION TEMPLATE FILE FOUND";
         try {
             if(UI.getCurrent().getLocale().equals(Locale.FRENCH)) {
-                Resource template = resourceLoader.getResource("classpath:comite_fr.template");
-                result = IOUtils.toString(template.getInputStream(),"UTF-8");
+                result = getTextFromResource(resourceLoader.getResource("classpath:comite_fr.template"));
             }
+            else if(UI.getCurrent().getLocale().equals(Locale.ENGLISH)) {
+                result = getTextFromResource(resourceLoader.getResource("classpath:comite_en.template"));
+            }
+            else if(UI.getCurrent().getLocale().equals(Locale.GERMAN)) {
+                result = getTextFromResource(resourceLoader.getResource("classpath:comite_de.template"));
+            }
+
         } catch (IOException e) {
             throw new RuntimeException();
         }
