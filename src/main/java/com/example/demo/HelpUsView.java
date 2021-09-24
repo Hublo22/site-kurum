@@ -18,29 +18,59 @@ import com.vaadin.flow.i18n.LocaleChangeEvent;
 import com.vaadin.flow.i18n.LocaleChangeObserver;
 import com.vaadin.flow.router.Route;
 
+import java.util.Locale;
+
 
 @Route(value = "helpus", layout = MainView.class)
 public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
 
     Label intro;
+    RadioButtonGroup<String> gender;
+    TextField firstName;
+    TextField lastName;
+    TextField address;
+    NumberField postalCode;
+    TextField city;
+    EmailField email;
+    NumberField phone;
+    Checkbox becomeMember;
+    Checkbox wantInfoForEducationProgram;
+    Button send;
 
     public HelpUsView() {
 
-        intro = new Label(getTranslation("helpus.intro", UI.getCurrent().getLocale()));
-        RadioButtonGroup<String> gender = new RadioButtonGroup<>();
-        gender.setItems("Madame", "Monsieur");
+        intro = new Label(getTranslation("helpus.intro", local()));
+
+        gender = new RadioButtonGroup<>();
+        gender.setItems(getTranslation("helpus.miss",local()), getTranslation("helpus.sir",local()));
         gender.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
-        TextField firstName = new TextField("Nom");
+        gender.setRequired(true);
+
+        firstName = new TextField(getTranslation("helpus.firstName",local()));
         firstName.setRequired(true);
-        TextField lastName = new TextField("Prénom");
-        TextField address = new TextField("Adresse");
-        NumberField postalCode = new NumberField("Code postal");
-        TextField city = new TextField("Localité");
-        EmailField email = new EmailField("Email");
-        NumberField phone = new NumberField("Téléphone");
-        Checkbox becomeMember = new Checkbox("Je souhaite devenir membre");
-        Checkbox wantInfoForEducationProgram = new Checkbox("Je souhaite des informations pour le soutien d'une orpheline");
-        Button send = new Button("Envoyer");
+
+        lastName = new TextField(getTranslation("helpus.lastName", local()));
+        lastName.setRequired(true);
+
+        address = new TextField(getTranslation("helpus.address",local()));
+        address.setRequired(true);
+
+        postalCode = new NumberField(getTranslation("helpus.nip",local()));
+        postalCode.setRequiredIndicatorVisible(true);
+
+        city = new TextField(getTranslation("helpus.city",local()));
+        city.setRequired(true);
+
+        email = new EmailField("Email");
+        email.setRequiredIndicatorVisible(false);
+
+        phone = new NumberField(getTranslation("helpus.phone",local()));
+
+        becomeMember = new Checkbox(getTranslation("helpus.becomeMember",local()));
+
+        wantInfoForEducationProgram = new Checkbox(getTranslation("helpus.infoForEducationProgram",local()));
+
+        send = new Button(getTranslation("helpus.send",local()));
 
         HorizontalLayout line1 = new HorizontalLayout(gender);
         HorizontalLayout line2 = new HorizontalLayout(firstName,lastName);
@@ -52,8 +82,22 @@ public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
 
     }
 
+    private Locale local() {
+        return UI.getCurrent().getLocale();
+    }
+
     @Override
     public void localeChange(LocaleChangeEvent event) {
-        intro.setText(getTranslation("helpus.intro", UI.getCurrent().getLocale()));
+        intro.setText(getTranslation("helpus.intro", local()));
+        gender.setItems(getTranslation("helpus.miss",local()), getTranslation("helpus.sir",local()));
+        firstName.setLabel(getTranslation("helpus.firstName",local()));
+        lastName.setLabel(getTranslation("helpus.lastName", local()));
+        address.setLabel(getTranslation("helpus.address",local()));
+        postalCode.setLabel(getTranslation("helpus.nip",local()));
+        city.setLabel(getTranslation("helpus.city",local()));
+        phone.setLabel(getTranslation("helpus.phone",local()));
+        becomeMember.setLabel(getTranslation("helpus.becomeMember",local()));
+        wantInfoForEducationProgram.setLabel(getTranslation("helpus.infoForEducationProgram",local()));
+        send.setText(getTranslation("helpus.send",local()));
     }
 }
