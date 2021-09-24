@@ -17,7 +17,12 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.i18n.LocaleChangeEvent;
 import com.vaadin.flow.i18n.LocaleChangeObserver;
 import com.vaadin.flow.router.Route;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 
@@ -71,6 +76,9 @@ public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
         wantInfoForEducationProgram = new Checkbox(getTranslation("helpus.infoForEducationProgram",local()));
 
         send = new Button(getTranslation("helpus.send",local()));
+        send.addClickListener(event -> {
+            onSend();
+        });
 
         HorizontalLayout line1 = new HorizontalLayout(gender);
         HorizontalLayout line2 = new HorizontalLayout(firstName,lastName);
@@ -80,6 +88,37 @@ public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
         add(intro,line1,line2,line3,line4,becomeMember,wantInfoForEducationProgram,send);
         setAlignItems(Alignment.CENTER);
 
+    }
+
+    private void onSend() {
+        String submittedDate = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
+        StringBuffer value = new StringBuffer("Forms submitted on " + submittedDate);
+        value.append(System.getProperty("line.separator"));
+        value.append("Gender :" + gender.getValue());
+        value.append(System.getProperty("line.separator"));
+        value.append("First Name: " + firstName.getValue());
+        value.append(System.getProperty("line.separator"));
+        value.append("Last Name: " + lastName.getValue());
+        value.append(System.getProperty("line.separator"));
+        value.append("Adress : " + address.getValue());
+        value.append(System.getProperty("line.separator"));
+        value.append("NIP : " + postalCode.getValue());
+        value.append(System.getProperty("line.separator"));
+        value.append("City : " + city.getValue());
+        value.append(System.getProperty("line.separator"));
+        value.append("Email : " + email.getValue());
+        value.append(System.getProperty("line.separator"));
+        value.append("Phone : " + phone.getValue());
+        value.append(System.getProperty("line.separator"));
+        value.append("Wants to be member : " + becomeMember.getValue());
+        value.append(System.getProperty("line.separator"));
+        value.append("Wants info to support orphan : " + wantInfoForEducationProgram.getValue());
+        value.append(System.getProperty("line.separator"));
+        try {
+            FileUtils.writeStringToFile(new File("C:/temp/newContact-"+submittedDate), value.toString(),"UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private Locale local() {
