@@ -16,3 +16,7 @@ body {
     font-size: 80px;
 }
 
+#confirmation {
+    color:red;
+}
+

@@ -119,6 +119,13 @@ public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        showConfirmation();
+    }
+
+    private void showConfirmation() {
+        Label confirmation = new Label(getTranslation("helpus.confirmation",local()));
+        confirmation.setId("confirmation");
+        add(confirmation);
     }
 
     private Locale local() {
