@@ -19,6 +19,7 @@ public class LanguageList {
         ComboBox<String> languages = new ComboBox<>();
         languages.setItems("FR","DE","EN");
         languages.setLabel("");
+        languages.setId("languageSelector");
 
         languages.addValueChangeListener(change -> {
            Locale l;

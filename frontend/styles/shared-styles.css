@@ -13,10 +13,21 @@ body {
 
 #mainTitle {
     font-family: papyrus, Verdana, Arial, Sans-serif;
-    font-size: 80px;
+    font-size: 68px;
 }
 
 #confirmation {
     color:red;
 }
 
+#languageSelector {
+   width:60px;
+   text-align: left;
+   text-align-last: left;
+   -moz-text-align-last: left;
+}
+
+#languageSelectorLayout {
+    padding-block-end: 140px;
+    padding-right: 5px;
+}
