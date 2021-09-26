@@ -7,13 +7,16 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLayout;
-
-import java.awt.*;
+import com.vaadin.flow.theme.Theme;
 
 @CssImport("./styles/shared-styles.css")
+//@Theme(themeFolder = "kurum")
 public class MainView extends AppLayout implements RouterLayout {
 
     public MainView() {
+
+        setId("mainView");
+
         Label mainTitle = new Label("Association de solidarité Kurumbagaram");
         mainTitle.setId("mainTitle");
 

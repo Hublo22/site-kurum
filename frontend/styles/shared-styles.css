@@ -1,3 +1,7 @@
+html {
+    --lumo-contrast-5pct: none;
+}
+
 body {
   background: url(img/indiaFlag.png) no-repeat center center fixed;
   -webkit-background-size: cover;
