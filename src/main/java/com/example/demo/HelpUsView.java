@@ -41,6 +41,7 @@ public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
     Checkbox becomeMember;
     Checkbox wantInfoForEducationProgram;
     Button send;
+    Label confirmation;
 
     public HelpUsView() {
 
@@ -80,12 +81,16 @@ public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
             onSend();
         });
 
+        confirmation = new Label(getTranslation("helpus.confirmation",local()));
+        confirmation.setId("confirmation");
+        confirmation.setVisible(false);
+
         HorizontalLayout line1 = new HorizontalLayout(gender);
         HorizontalLayout line2 = new HorizontalLayout(firstName,lastName);
         HorizontalLayout line3 = new HorizontalLayout(postalCode,address,city);
         HorizontalLayout line4 = new HorizontalLayout(email,phone);
 
-        add(intro,line1,line2,line3,line4,becomeMember,wantInfoForEducationProgram,send);
+        add(intro,line1,line2,line3,line4,becomeMember,wantInfoForEducationProgram,send,confirmation);
         setAlignItems(Alignment.CENTER);
 
     }
@@ -117,15 +122,10 @@ public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
         try {
             FileUtils.writeStringToFile(new File("C:/temp/newContact-"+submittedDate), value.toString(),"UTF-8");
         } catch (IOException e) {
+            confirmation.setVisible(false);
             e.printStackTrace();
         }
-        showConfirmation();
-    }
-
-    private void showConfirmation() {
-        Label confirmation = new Label(getTranslation("helpus.confirmation",local()));
-        confirmation.setId("confirmation");
-        add(confirmation);
+        confirmation.setVisible(true);
     }
 
     private Locale local() {
@@ -145,5 +145,7 @@ public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
         becomeMember.setLabel(getTranslation("helpus.becomeMember",local()));
         wantInfoForEducationProgram.setLabel(getTranslation("helpus.infoForEducationProgram",local()));
         send.setText(getTranslation("helpus.send",local()));
+        confirmation.setText(getTranslation("helpus.confirmation",local()));
+        confirmation.setVisible(false);
     }
 }
