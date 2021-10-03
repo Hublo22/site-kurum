@@ -18,6 +18,7 @@ public class MainMenuBar extends MenuBar implements LocaleChangeObserver {
         super();
         addMenuEntry("presentation");
         addMenuEntry("sisters");
+        addMenuEntry("project");
         addMenuEntry("comite");
         addMenuEntry("helpus");
     }
