@@ -6,12 +6,27 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class Utils {
 
     private static String getTextFromResource(Resource r) throws IOException {
-        return IOUtils.toString(r.getInputStream(),"UTF-8").replace(System.getProperty("line.separator"),"<br />");
+        String result = "";
+        String fileContent = IOUtils.toString(r.getInputStream(), "UTF-8");
+        String[] split = fileContent.split(System.getProperty("line.separator"));
+        List<String> contentAsList = Arrays.stream(split).collect(Collectors.toList());
+        for(String s : contentAsList) {
+            if(!s.endsWith("</li>")) {
+                result += s + "<br />";
+            }
+            else {
+                result += s;
+            }
+        }
+        return result;
     }
 
     public static String loadContentFor(ResourceLoader resourceLoader, String templateFileFirstPart) {
