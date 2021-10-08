@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
@@ -18,6 +19,8 @@ import com.vaadin.flow.i18n.LocaleChangeEvent;
 import com.vaadin.flow.i18n.LocaleChangeObserver;
 import com.vaadin.flow.router.Route;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +32,10 @@ import java.util.Locale;
 @Route(value = "helpus", layout = MainView.class)
 public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
 
-    Label intro;
+    @Autowired
+    ResourceLoader resourceLoader;
+
+    Html html;
     RadioButtonGroup<String> gender;
     TextField firstName;
     TextField lastName;
@@ -42,10 +48,11 @@ public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
     Checkbox wantInfoForEducationProgram;
     Button send;
     Label confirmation;
+    HorizontalLayout line1,line2,line3,line4;
 
     public HelpUsView() {
 
-        intro = new Label(getTranslation("helpus.intro", local()));
+        html = new Html("<text></text>");
 
         gender = new RadioButtonGroup<>();
         gender.setItems(getTranslation("helpus.miss",local()), getTranslation("helpus.sir",local()));
@@ -85,12 +92,12 @@ public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
         confirmation.setId("confirmation");
         confirmation.setVisible(false);
 
-        HorizontalLayout line1 = new HorizontalLayout(gender);
-        HorizontalLayout line2 = new HorizontalLayout(firstName,lastName);
-        HorizontalLayout line3 = new HorizontalLayout(postalCode,address,city);
-        HorizontalLayout line4 = new HorizontalLayout(email,phone);
+        line1 = new HorizontalLayout(gender);
+        line2 = new HorizontalLayout(firstName,lastName);
+        line3 = new HorizontalLayout(postalCode,address,city);
+        line4 = new HorizontalLayout(email,phone);
 
-        add(intro,line1,line2,line3,line4,becomeMember,wantInfoForEducationProgram,send,confirmation);
+        add(html,line1,line2,line3,line4,becomeMember,wantInfoForEducationProgram,send,confirmation);
         setAlignItems(Alignment.CENTER);
 
     }
@@ -134,7 +141,11 @@ public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
 
     @Override
     public void localeChange(LocaleChangeEvent event) {
-        intro.setText(getTranslation("helpus.intro", local()));
+
+        remove(html,line1,line2,line3,line4,becomeMember,wantInfoForEducationProgram,send,confirmation);
+        String content = Utils.loadContentFor(resourceLoader,"helpus");
+        html = new Html("<text>" + content + "</text>");
+
         gender.setItems(getTranslation("helpus.miss",local()), getTranslation("helpus.sir",local()));
         firstName.setLabel(getTranslation("helpus.firstName",local()));
         lastName.setLabel(getTranslation("helpus.lastName", local()));
@@ -147,5 +158,12 @@ public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
         send.setText(getTranslation("helpus.send",local()));
         confirmation.setText(getTranslation("helpus.confirmation",local()));
         confirmation.setVisible(false);
+
+        line1 = new HorizontalLayout(gender);
+        line2 = new HorizontalLayout(firstName,lastName);
+        line3 = new HorizontalLayout(postalCode,address,city);
+        line4 = new HorizontalLayout(email,phone);
+
+        add(html,line1,line2,line3,line4,becomeMember,wantInfoForEducationProgram,send,confirmation);
     }
 }
