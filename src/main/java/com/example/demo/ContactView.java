@@ -1,12 +1,10 @@
 package com.example.demo;
 
+import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
-import com.vaadin.flow.component.datepicker.DatePicker;
-import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
@@ -18,6 +16,8 @@ import com.vaadin.flow.i18n.LocaleChangeEvent;
 import com.vaadin.flow.i18n.LocaleChangeObserver;
 import com.vaadin.flow.router.Route;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,11 +25,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+@Route(value = "contactAndInfo", layout = MainView.class)
+public class ContactView extends VerticalLayout implements LocaleChangeObserver {
 
-@Route(value = "helpus", layout = MainView.class)
-public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
+    @Autowired
+    ResourceLoader resourceLoader;
 
-    Label intro;
+    Html html;
     RadioButtonGroup<String> gender;
     TextField firstName;
     TextField lastName;
@@ -38,61 +40,54 @@ public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
     TextField city;
     EmailField email;
     NumberField phone;
-    Checkbox becomeMember;
-    Checkbox wantInfoForEducationProgram;
     Button send;
     Label confirmation;
+    HorizontalLayout line1,line2,line3,line4;
 
-    public HelpUsView() {
-
-        intro = new Label(getTranslation("helpus.intro", local()));
+    public ContactView() {
+        html = new Html("<text></text>");
 
         gender = new RadioButtonGroup<>();
-        gender.setItems(getTranslation("helpus.miss",local()), getTranslation("helpus.sir",local()));
+        gender.setItems(getTranslation("contact.miss",local()), getTranslation("contact.sir",local()));
         gender.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
         gender.setRequired(true);
 
-        firstName = new TextField(getTranslation("helpus.firstName",local()));
+        firstName = new TextField(getTranslation("contact.firstName",local()));
         firstName.setRequired(true);
 
-        lastName = new TextField(getTranslation("helpus.lastName", local()));
+        lastName = new TextField(getTranslation("contact.lastName", local()));
         lastName.setRequired(true);
 
-        address = new TextField(getTranslation("helpus.address",local()));
+        address = new TextField(getTranslation("contact.address",local()));
         address.setRequired(true);
 
-        postalCode = new NumberField(getTranslation("helpus.nip",local()));
+        postalCode = new NumberField(getTranslation("contact.nip",local()));
         postalCode.setRequiredIndicatorVisible(true);
 
-        city = new TextField(getTranslation("helpus.city",local()));
+        city = new TextField(getTranslation("contact.city",local()));
         city.setRequired(true);
 
         email = new EmailField("Email");
         email.setRequiredIndicatorVisible(false);
 
-        phone = new NumberField(getTranslation("helpus.phone",local()));
+        phone = new NumberField(getTranslation("contact.phone",local()));
 
-        becomeMember = new Checkbox(getTranslation("helpus.becomeMember",local()));
-
-        wantInfoForEducationProgram = new Checkbox(getTranslation("helpus.infoForEducationProgram",local()));
-
-        send = new Button(getTranslation("helpus.send",local()));
+        send = new Button(getTranslation("contact.send",local()));
         send.addClickListener(event -> {
             onSend();
         });
 
-        confirmation = new Label(getTranslation("helpus.confirmation",local()));
+        confirmation = new Label(getTranslation("contact.confirmation",local()));
         confirmation.setId("confirmation");
         confirmation.setVisible(false);
 
-        HorizontalLayout line1 = new HorizontalLayout(gender);
-        HorizontalLayout line2 = new HorizontalLayout(firstName,lastName);
-        HorizontalLayout line3 = new HorizontalLayout(postalCode,address,city);
-        HorizontalLayout line4 = new HorizontalLayout(email,phone);
+        line1 = new HorizontalLayout(gender);
+        line2 = new HorizontalLayout(firstName,lastName);
+        line3 = new HorizontalLayout(postalCode,address,city);
+        line4 = new HorizontalLayout(email,phone);
 
-        add(intro,line1,line2,line3,line4,becomeMember,wantInfoForEducationProgram,send,confirmation);
+        add(html,line1,line2,line3,line4,send,confirmation);
         setAlignItems(Alignment.CENTER);
-
     }
 
     private void onSend() {
@@ -115,12 +110,8 @@ public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
         value.append(System.getProperty("line.separator"));
         value.append("Phone : " + phone.getValue());
         value.append(System.getProperty("line.separator"));
-        value.append("Wants to be member : " + becomeMember.getValue());
-        value.append(System.getProperty("line.separator"));
-        value.append("Wants info to support orphan : " + wantInfoForEducationProgram.getValue());
-        value.append(System.getProperty("line.separator"));
         try {
-            FileUtils.writeStringToFile(new File("C:/temp/newHelpus-"+submittedDate), value.toString(),"UTF-8");
+            FileUtils.writeStringToFile(new File("C:/temp/newContact-"+submittedDate), value.toString(),"UTF-8");
         } catch (IOException e) {
             confirmation.setVisible(false);
             e.printStackTrace();
@@ -134,18 +125,27 @@ public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
 
     @Override
     public void localeChange(LocaleChangeEvent event) {
-        intro.setText(getTranslation("helpus.intro", local()));
-        gender.setItems(getTranslation("helpus.miss",local()), getTranslation("helpus.sir",local()));
-        firstName.setLabel(getTranslation("helpus.firstName",local()));
-        lastName.setLabel(getTranslation("helpus.lastName", local()));
-        address.setLabel(getTranslation("helpus.address",local()));
-        postalCode.setLabel(getTranslation("helpus.nip",local()));
-        city.setLabel(getTranslation("helpus.city",local()));
-        phone.setLabel(getTranslation("helpus.phone",local()));
-        becomeMember.setLabel(getTranslation("helpus.becomeMember",local()));
-        wantInfoForEducationProgram.setLabel(getTranslation("helpus.infoForEducationProgram",local()));
-        send.setText(getTranslation("helpus.send",local()));
-        confirmation.setText(getTranslation("helpus.confirmation",local()));
+        remove(html,line1,line2,line3,line4,send,confirmation);
+        String content = Utils.loadContentFor(resourceLoader,"contactAndInfo");
+        html = new Html("<text>" + content + "</text>");
+
+
+        gender.setItems(getTranslation("contact.miss",local()), getTranslation("contact.sir",local()));
+        firstName.setLabel(getTranslation("contact.firstName",local()));
+        lastName.setLabel(getTranslation("contact.lastName", local()));
+        address.setLabel(getTranslation("contact.address",local()));
+        postalCode.setLabel(getTranslation("contact.nip",local()));
+        city.setLabel(getTranslation("contact.city",local()));
+        phone.setLabel(getTranslation("contact.phone",local()));
+        send.setText(getTranslation("contact.send",local()));
+        confirmation.setText(getTranslation("contact.confirmation",local()));
         confirmation.setVisible(false);
+
+        line1 = new HorizontalLayout(gender);
+        line2 = new HorizontalLayout(firstName,lastName);
+        line3 = new HorizontalLayout(postalCode,address,city);
+        line4 = new HorizontalLayout(email,phone);
+
+        add(html,line1,line2,line3,line4,send,confirmation);
     }
 }

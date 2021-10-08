@@ -19,7 +19,7 @@ public class Utils {
         String[] split = fileContent.split(System.getProperty("line.separator"));
         List<String> contentAsList = Arrays.stream(split).collect(Collectors.toList());
         for(String s : contentAsList) {
-            if(!s.endsWith("</li>")) {
+            if(!s.endsWith("</li>") || s.endsWith("</h4>")) {
                 result += s + "<br />";
             }
             else {
