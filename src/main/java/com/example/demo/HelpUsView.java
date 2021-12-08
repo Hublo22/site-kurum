@@ -127,7 +127,7 @@ public class HelpUsView extends VerticalLayout implements LocaleChangeObserver {
         value.append("Wants info to support orphan : " + wantInfoForEducationProgram.getValue());
         value.append(System.getProperty("line.separator"));
         try {
-            FileUtils.writeStringToFile(new File("C:/temp/newHelpus-"+submittedDate), value.toString(),"UTF-8");
+            FileUtils.writeStringToFile(new File("/home/jelastic/contactFromSite/newHelpus-"+submittedDate), value.toString(),"UTF-8");
         } catch (IOException e) {
             confirmation.setVisible(false);
             e.printStackTrace();

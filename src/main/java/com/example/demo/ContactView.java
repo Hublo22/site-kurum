@@ -111,7 +111,7 @@ public class ContactView extends VerticalLayout implements LocaleChangeObserver 
         value.append("Phone : " + phone.getValue());
         value.append(System.getProperty("line.separator"));
         try {
-            FileUtils.writeStringToFile(new File("C:/temp/newContact-"+submittedDate), value.toString(),"UTF-8");
+            FileUtils.writeStringToFile(new File("/home/jelastic/contactFromSite/newContact-"+submittedDate), value.toString(),"UTF-8");
         } catch (IOException e) {
             confirmation.setVisible(false);
             e.printStackTrace();
