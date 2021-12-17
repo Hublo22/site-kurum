@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
@@ -15,12 +16,15 @@ public class SisterView extends VerticalLayout implements LocaleChangeObserver {
 
     Label desc;
 
+    Html html;
+
     @Autowired
     ResourceLoader resourceLoader;
 
     public SisterView() {
         desc = new Label(getTranslation("sister.desc", UI.getCurrent().getLocale()));
-
+        String content = "<text></text>";
+        html = new Html(content);
         setAlignItems(Alignment.CENTER);
 
         Image sisterImg = new Image("img/sisterKurum.jpg", "Sister Kurumbagaram");
@@ -28,10 +32,15 @@ public class SisterView extends VerticalLayout implements LocaleChangeObserver {
 
         add(desc);
         add(sisterImg);
+        add(html);
     }
 
     @Override
     public void localeChange(LocaleChangeEvent event) {
         desc.setText(getTranslation("sister.desc", UI.getCurrent().getLocale()));
+        remove(html);
+        String content = Utils.loadContentFor(resourceLoader,"sister");
+        html = new Html("<text>" + content + "</text>");
+        add(html);
     }
 }

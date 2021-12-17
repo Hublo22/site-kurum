@@ -37,7 +37,7 @@ public class ComiteView extends VerticalLayout implements LocaleChangeObserver {
         comiteImg.setMaxWidth("750px");
         String content = "<text></text>";
         html = new Html(content);
-        add(comiteImg);
+       // add(comiteImg);
         add(html);
         setAlignItems(Alignment.CENTER);
     }
