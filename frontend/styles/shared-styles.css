@@ -15,9 +15,11 @@ body {
     font-size: 32px;
 }
 
-#mainTitle {
-    font-family: papyrus, Verdana, Arial, Sans-serif;
-    font-size: 68px;
+@media only screen and (min-width: 768px) {
+    #mainTitle {
+        font-family: papyrus, Verdana, Arial, Sans-serif;
+        font-size: 68px;
+    }
 }
 
 #confirmation {
