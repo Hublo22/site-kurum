@@ -37,5 +37,6 @@ public class MainView extends AppLayout implements RouterLayout {
         vl.setAlignItems(FlexComponent.Alignment.CENTER);
         addToNavbar(vl,line0);
 
+
     }
 }
