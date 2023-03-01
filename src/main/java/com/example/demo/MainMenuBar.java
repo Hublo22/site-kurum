@@ -21,8 +21,9 @@ public class MainMenuBar extends MenuBar implements LocaleChangeObserver {
         addMenuEntry("project");
         addMenuEntry("comite");
         addMenuEntry("helpus");
-        addMenuEntry("francisSelvadorayFoundation");
+        //addMenuEntry("francisSelvadorayFoundation");
         addMenuEntry("contactAndInfo");
+        addMenuEntry("pvAg2022");
     }
 
     private void addMenuEntry(String name) {

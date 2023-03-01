@@ -15,9 +15,6 @@ public class HomeView extends VerticalLayout {
 
         add(img);
         setAlignItems(Alignment.CENTER);
-
-
-
     }
 
 }
