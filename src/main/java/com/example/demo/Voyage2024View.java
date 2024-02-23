@@ -43,8 +43,66 @@ public class Voyage2024View extends VerticalLayout {
         Image k7 = new Image("img/voyage2024/k7.JPG", "Avion");
         k7.setMaxWidth("500px");
 
+
         Anchor a = new Anchor("https://youtu.be/RFb-FxBPaJE", "Vidéo faite par Jacques Kuenlin.");
         a.setTarget("_blank");
+
+
+        Image f1 = new Image("img/voyage2024/f1.JPG", "f");
+        f1.setMaxWidth("500px");
+        Image f2 = new Image("img/voyage2024/f2.JPG", "f");
+        f2.setMaxWidth("500px");
+        Image f3 = new Image("img/voyage2024/f3.JPG", "f");
+        f3.setMaxWidth("500px");
+        Image f4 = new Image("img/voyage2024/f4.JPG", "f");
+        f4.setMaxWidth("500px");
+        Image f5 = new Image("img/voyage2024/f5.JPG", "f");
+        f5.setMaxWidth("500px");
+        Image f6 = new Image("img/voyage2024/f6.JPG", "f");
+        f6.setMaxWidth("500px");
+        Image f7 = new Image("img/voyage2024/f7.JPG", "f");
+        f7.setMaxWidth("500px");
+        Image f8 = new Image("img/voyage2024/f8.JPG", "f");
+        f8.setMaxWidth("500px");
+        Image f9 = new Image("img/voyage2024/f9.JPG", "f");
+        f9.setMaxWidth("500px");
+        Image f10 = new Image("img/voyage2024/f10.JPG", "f");
+        f10.setMaxWidth("500px");
+        Image f11 = new Image("img/voyage2024/f11.JPG", "f");
+        f11.setMaxWidth("500px");
+        Image f12 = new Image("img/voyage2024/f12.JPG", "f");
+        f12.setMaxWidth("500px");
+        Image f13 = new Image("img/voyage2024/f13.JPG", "f");
+        f13.setMaxWidth("500px");
+        Image f14 = new Image("img/voyage2024/f14.JPG", "f");
+        f14.setMaxWidth("500px");
+        Image f15 = new Image("img/voyage2024/f15.JPG", "f");
+        f15.setMaxWidth("500px");
+        Image f16 = new Image("img/voyage2024/f16.JPG", "f");
+        f16.setMaxWidth("500px");
+        Image f17 = new Image("img/voyage2024/f17.JPG", "f");
+        f17.setMaxWidth("500px");
+        Image f18 = new Image("img/voyage2024/f18.JPG", "f");
+        f18.setMaxWidth("500px");
+        Image f19 = new Image("img/voyage2024/f19.JPG", "f");
+        f19.setMaxWidth("500px");
+        Image f20 = new Image("img/voyage2024/f20.JPG", "f");
+        f20.setMaxWidth("500px");
+        Image f21 = new Image("img/voyage2024/f21.JPG", "f");
+        f21.setMaxWidth("500px");
+
+        HorizontalLayout hf1 = new HorizontalLayout(new Label("22.02.2024: Quelques image de Kurum"));
+        HorizontalLayout hf2 = new HorizontalLayout(f1,f2,f3);
+        HorizontalLayout hf3 = new HorizontalLayout(f4,f5,f6);
+        HorizontalLayout hf4 = new HorizontalLayout(f7,f8,f9);
+        HorizontalLayout hf5 = new HorizontalLayout(f10,f11,f12);
+        HorizontalLayout hf6 = new HorizontalLayout(f13,f14,f15);
+        HorizontalLayout hf7 = new HorizontalLayout(f16,f17,f18);
+        HorizontalLayout hf8 = new HorizontalLayout(f19,f20,f21);
+
+
+
+
         HorizontalLayout line00 = new HorizontalLayout(a);
         HorizontalLayout line0 = new HorizontalLayout(new Label("20.02.2024: Quelques images de l'orphelinat ainsi que de Syria."));
         HorizontalLayout line01 = new HorizontalLayout(k1,k2,k3);
@@ -54,6 +112,6 @@ public class Voyage2024View extends VerticalLayout {
         HorizontalLayout line2 = new HorizontalLayout(avion,avion2,avion3);
         HorizontalLayout line3 = new HorizontalLayout(enfant,mabalipuram,picnic);
         HorizontalLayout line4 = new HorizontalLayout(kurum,kurum2);
-        add(line00,line0,line01,line02,line03,line1,line2,line3,line4);
+        add(hf1,hf2,hf3,hf4,hf5,hf6,hf7,hf8,line00,line0,line01,line02,line03,line1,line2,line3,line4);
     }
 }
